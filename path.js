@@ -10,3 +10,5 @@ console.log(path.extname(__filename));
 console.log(path.join('folder1','example.txt'));
 
 console.log(path.parse(__filename));
+
+console.log(path.resolve('folder1', 'example.txt'));
