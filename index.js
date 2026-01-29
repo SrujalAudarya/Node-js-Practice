@@ -1,11 +1,24 @@
-const {sum, diff, product, div, mod} = require('./calculate');
+const mongos = require('mongoose');
+const express = require('express');
 
-console.log("Sum: ", sum(10, 5));
+const userRoutes = require('./routes/userRoutes');
 
-console.log("Difference: ", diff(10, 5));
+mongos.connect('mongodb://localhost:27017/librarydb').
+  then(() => {
+    console.log("Connected to MongoDB successfully.");
+  }).catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+});
 
-console.log("Product: ", product(10, 5));
+const app = express();
+app.use(express.json());
 
-console.log("Division: ", div(10, 5));
+app.use('/users', userRoutes);
 
-console.log("Modulus: ", mod(10, 5));
+app.get('/', (req, res) => {
+    res.send("<h1>Welcome </h1>")
+});
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
