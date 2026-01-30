@@ -20,7 +20,8 @@ exports.createUser = async (req, res) =>{
 exports.getAllUsers = async (req, res) =>{
     try{
         const users = await User.find();
-        res.status(200).json(users);
+        //res.status(200).json(users);
+        res.render('users', {users} )
     }
     catch(err){
         res.status(500).send({message: "Internal Server Error"});
